@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import Items from "./Items";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "./Cart";
 const ContextCart = () => {
   const { item, totalItem, totalAmount, clearCart } = useContext(CartContext);
-
+  const navigate = useNavigate();
+  const goToCheckout = () => {
+    navigate("/Checkout");
+  };
   if (item.length === 0) {
     return (
       <>
@@ -21,10 +25,10 @@ const ContextCart = () => {
         </header>
 
         <section className="main-cart-section">
-          <h1>shopping Cart</h1>
+          <h1>Food Cart</h1>
           <p className="total-items">
             you have <span className="total-items-count">{totalItem} </span>{" "}
-            items in shopping cart
+            items in cart
           </p>
         </section>
       </>
@@ -43,7 +47,7 @@ const ContextCart = () => {
         </div>
       </header>
       <section className="main-cart-section">
-        <h1>Shopping Cart</h1>
+        <h1>Food Cart</h1>
         <p className="total-items">
           You Have <span className="total-items-count">{totalItem}</span> items
           in your cart
@@ -61,7 +65,7 @@ const ContextCart = () => {
           <h3>
             Cart Total : <span>{totalAmount}₹</span>
           </h3>
-          <button>checkout</button>
+          <button onClick={() => goToCheckout()}>checkout</button>
           <button className="clear-cart" onClick={clearCart}>
             Clear Cart
           </button>
